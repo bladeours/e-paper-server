@@ -1,6 +1,6 @@
 import com.typesafe.sbt.packager.docker.*
 
-name := """e-paper-calendar-server"""
+name := """e-paper-server"""
 
 version := "0.0.1"
 
