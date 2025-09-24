@@ -47,17 +47,14 @@ jobs:
           VERSION=$(grep '^version :=' build.sbt | head -n 1 | sed -E 's/version := "(.*)"/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Project version is $VERSION"
-        working-directory: ./e-paper-calendar-server
 
       # 7️⃣ Run tests
       - name: Run tests
         run: sbt test
-        working-directory: ./e-paper-calendar-server
 
       # 6️⃣ Build Docker image using sbt-native-packager
       - name: Build Docker image
         run: sbt docker:publishLocal
-        working-directory: ./e-paper-calendar-server
 
       # 7️⃣ Log in to Docker Hub
       - name: Log in to Docker Hub
@@ -69,7 +66,7 @@ jobs:
       # 8️⃣ Tag and push Docker image
       - name: Tag and push Docker image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/e-paper-calendar-server
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/e-paper-server
           docker tag e-paper-calendar-server:$VERSION $IMAGE_NAME:$VERSION
           docker tag e-paper-calendar-server:$VERSION $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$VERSION
