@@ -67,7 +67,7 @@ jobs:
       - name: Tag and push Docker image
         run: |
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/e-paper-server
-          docker tag e-paper-calendar-server:$VERSION $IMAGE_NAME:$VERSION
-          docker tag e-paper-calendar-server:$VERSION $IMAGE_NAME:latest
+          docker tag e-paper-server:$VERSION $IMAGE_NAME:$VERSION
+          docker tag e-paper-server:$VERSION $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$VERSION
           docker push $IMAGE_NAME:latest
