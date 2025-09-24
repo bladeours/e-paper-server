@@ -1,0 +1,16 @@
+*.py
+logs
+target
+.bsp
+.idea
+idea_modules
+classpath
+project/project
+settings
+/RUNNING_PID
+conf/application.dev.conf
+debug.png
+.venv
+.vscode
+.conf
+.config

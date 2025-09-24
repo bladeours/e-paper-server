@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    padding: 0;
+    background: white;
+    color: black;
+}
+
+#calendar {
+    max-width: 800px !important;
+    margin: 0 auto;
+    max-height: 480px !important;
+}
+
+.fc {
+    color: black !important;
+    background: white !important;
+}
+
+.fc .fc-daygrid-day {
+    background: white !important;
+    border: 1px solid black !important;
+}
+
+.fc .fc-daygrid-day-number {
+    color: black !important;
+}
+
+.fc .fc-daygrid-event {
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+    font-weight: bold !important;
+}
+
+.fc .fc-event-title {
+    /*font-weight: normal !important;*/
+}
+
+/* Remove blue dots from events */
+.fc-event .fc-event-dot,
+.fc-daygrid-event-dot {
+    display: none !important;
+}
+
+.fc .fc-col-header-cell {
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+    font-size: 19px;
+}
+
+/* Remove today's highlight */
+.fc .fc-day-today {
+    background: white !important;
+}
+
+.fc-daygrid-event .fc-event-title {
+    white-space: normal !important;  /* allow wrapping */
+    overflow: hidden !important;     /* hide overflow beyond container */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;           /* limit to 3 lines */
+    -webkit-box-orient: vertical;
+    line-height: 1.2em;
+    max-height: 3.6em;               /* 3 lines * line-height */
+    text-overflow: ellipsis;
+    color: black;
+    text-align: center;
+}
+
+#calendar-top{
+    max-width: 800px;
+    border: 1px solid black;
+}
+
+#calendar-bottom-wrapper {
+    max-height: 240px;
+}
+
+#calendar-bottom {
+    max-width: 601px;
+    border: 1px solid black;
+    border-top: none;
+    margin-right: 1px;
+}
+
+.fc .fc-daygrid-event {
+    font-size: 17px !important;
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+    font-weight: bold !important;
+    padding-left: 5px !important;
+}
+
+.fc .fc-col-header-cell.fc-day-today {
+    background: white !important;
+    color: red !important;
+}
+#weather {
+    padding-top: 20px;
+    width: 197px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    height: 240px;
+}
+
+.current-temp {
+    margin: 0 0 10px 0;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-entry {
+    font-size: 20px;
+    margin: 6px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hour {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.icon {
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.forecast-icon {
+    vertical-align: middle;
+}
+
+#calendar-bottom-wrapper {
+    display: flex;
+    gap: 1px; /* optional, space between bottom calendar and weather */
+}
+
+#calendar-bottom {
+    flex: 1; /* take remaining space */
+    border: 1px solid black;
+    border-top: none;
+}
+
+.fc-col-header-cell.fc-day-today::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    left: 4px;
+}
+.fc-col-header-cell.fc-day-today {
+    position: relative;
+}
