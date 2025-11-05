@@ -21,7 +21,7 @@ class CalendarServiceImpl @Inject()(val config: Configuration, val iCalService: 
     try {
       val page = customPlaywright.page
       page.navigate("http://localhost:9000/calendar/html")
-      page.locator(".weather-entry").waitFor()
+      page.waitForSelector(".weather-entry")
 
       logger.debug("Saving screenshot to debug.png")
       val calendarDiv = page.querySelector("#calendar")
