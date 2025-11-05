@@ -19,13 +19,31 @@ function getWeatherIcon(code, isCurrent = false) {
 
 let lat = document.currentScript.dataset.lat;
 let long = document.currentScript.dataset.long;
-if(lat === "{{LAT}}") {
-    lat = "52.52"
-    long = "52.52"
+if (lat === "{{LAT}}") {
+    lat = "52.52";
+    long = "52.52";
 }
 
-fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&current_weather=true&forecast_days=1&timezone=auto`)
-    .then(res => res.json())
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&current_weather=true&forecast_days=1&timezone=auto`;
+
+async function fetchWithRetry(url, retries = 5, delay = 1000) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.warn(`Attempt ${attempt} failed: ${err.message}`);
+            if (attempt < retries) {
+                await new Promise(r => setTimeout(r, delay * attempt));
+            } else {
+                throw err;
+            }
+        }
+    }
+}
+
+fetchWithRetry(url)
     .then(data => {
         const hours = [8, 12, 16, 20];
 
@@ -42,14 +60,18 @@ fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&
                 const code = data.hourly.weathercode[i];
                 const icon = getWeatherIcon(code);
                 html += `
-          <div class="weather-entry">
-              <span class="hour">${hour}:00</span>
-              <span class="temp">${temp}°C</span>
-              <span class="icon">${icon}</span>
-          </div>
-        `;
+                    <div class="weather-entry">
+                        <span class="hour">${hour}:00</span>
+                        <span class="temp">${temp}°C</span>
+                        <span class="icon">${icon}</span>
+                    </div>
+                `;
             }
         });
 
         document.getElementById("weather").innerHTML = html;
+    })
+    .catch(err => {
+        document.getElementById("weather").innerHTML = `<p class="error">Couldn’t load weather data. Please try again later.</p>`;
+        console.error("Weather fetch failed after 5 retries:", err);
     });
