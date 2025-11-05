@@ -1,7 +1,7 @@
 package service
 
 import com.google.inject.ImplementedBy
-import com.microsoft.playwright.{Browser, BrowserType, Page, Playwright}
+import com.microsoft.playwright.{Browser, BrowserType, Locator, Page, Playwright}
 import play.api.{Configuration, Logging}
 import utils.ImageUtils.pngToRaw2BitBitmap
 
@@ -21,15 +21,7 @@ class CalendarServiceImpl @Inject()(val config: Configuration, val iCalService: 
     try {
       val page = customPlaywright.page
       page.navigate("http://localhost:9000/calendar/html")
-
-      page.waitForFunction(
-        """
-      () => {
-        const images = document.querySelectorAll('#calendar img');
-        return Array.from(images).every(img => img.complete);
-      }
-      """
-      )
+      page.locator(".weather-entry").waitFor()
 
       logger.debug("Saving screenshot to debug.png")
       val calendarDiv = page.querySelector("#calendar")
