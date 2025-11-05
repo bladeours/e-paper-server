@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ...commonOptions,
         initialView: "dayGrid",
         visibleRange: function (currentDate) {
-            let start = getMonday(currentDate);
+            // let start = getMonday(currentDate);
+            let start = new Date(currentDate);
+            start.setDate(start.getDate() - 1);
             let end = new Date(start);
             end.setDate(start.getDate() + 3); // czwartek
             return { start, end };
@@ -42,7 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ...commonOptions,
         initialView: "dayGrid",
         visibleRange: function (currentDate) {
-            let start = getMonday(currentDate);
+            // let start = getMonday(currentDate);
+            let start = new Date(currentDate);
+            start.setDate(start.getDate() - 1);
             start.setDate(start.getDate() + 4);
             let end = new Date(start);
             end.setDate(start.getDate() + 2);
