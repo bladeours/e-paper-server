@@ -42,7 +42,7 @@
     r="${adjustedRadius + stroke / 2}"
     fill="white"
     stroke="black"
-    stroke-width="4"
+    stroke-width="7"
   />
 
   <!-- Background track -->
@@ -62,7 +62,7 @@
     cy="${center}"
     r="${adjustedRadius}"
     fill="none"
-    stroke="black"
+    stroke="red"
     stroke-width="${stroke}"
     stroke-linecap="butt"
     stroke-dasharray="${adjustedCircumference}"
@@ -76,8 +76,9 @@
     text-anchor="middle"
     font-size="55"
     font-family="sans-serif"
-    fill="black"
+    fill="red"
     id="days-text"
+    font-weight="bold"
   ></text>
   <text
     x="50%"
@@ -86,6 +87,7 @@
     font-size="20"
     font-family="sans-serif"
     fill="black"
+    font-weight="bold"
   >Dni</text>
   <text
     x="50%"
@@ -94,6 +96,7 @@
     font-size="20"
     font-family="sans-serif"
     fill="black"
+    font-weight="bold"
   >do Tajlandziej</text>
   <text
     x="50%"
@@ -102,6 +105,7 @@
     font-size="20"
     font-family="sans-serif"
     fill="black"
+    font-weight="bold"
   >Przygody!</text>
 
 </svg>
