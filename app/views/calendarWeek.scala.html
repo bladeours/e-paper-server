@@ -16,7 +16,8 @@
             <div id="calendar-top"></div>
             <div id="calendar-bottom-wrapper">
                 <div id="calendar-bottom"></div>
-                <div id="weather"></div>
+                <div id="counter"></div>
+                @* <div id="weather"></div>*@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@@6.1.15/locales-all.global.min.js"></script>
@@ -34,7 +35,12 @@
         data-snowy="@routes.Assets.versioned("images/snowy.svg")"
         data-thunderstorm="@routes.Assets.versioned("images/thunderstorm.svg")">
         </script>
-
+        <script
+        src='@routes.Assets.versioned("javascripts/counter.js")'
+        data-start="2026-01-05"
+        data-target="2026-01-26"
+        >
+        </script>
         <script src='@routes.Assets.versioned("javascripts/calendar.js")'
         data-events='@events'></script>
     </body>

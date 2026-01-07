@@ -161,3 +161,9 @@ body {
 .fc-col-header-cell.fc-day-today {
     position: relative;
 }
+
+#counter {
+    display: flex;
+    align-items: center;      /* vertical centering */
+    justify-content: center;
+}
