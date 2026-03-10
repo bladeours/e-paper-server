@@ -1,3 +1,4 @@
+import com.typesafe.sbt.packager.MappingsHelper.directory
 import com.typesafe.sbt.packager.docker.*
 
 name := """e-paper-server"""
@@ -23,6 +24,28 @@ dockerEnvVars := Map(
   "PLAYWRIGHT_BROWSERS_PATH" -> "/ms-playwright"
 )
 dockerBaseImage := "eclipse-temurin:21-jdk-jammy"
+
+Docker / mappings ++= {
+  val publicDir = baseDirectory.value / "public" / "stylesheets"
+  publicDir.listFiles().map { file =>
+    file -> s"/opt/docker/public/stylesheets/${file.getName}"
+  }.toSeq
+}
+
+Docker / mappings ++= {
+  val publicDir = baseDirectory.value / "public" / "javascripts"
+  publicDir.listFiles().map { file =>
+    file -> s"/opt/docker/public/javascripts/${file.getName}"
+  }.toSeq
+}
+
+Docker / mappings ++= {
+  val publicDir = baseDirectory.value / "public" / "images"
+  publicDir.listFiles().map { file =>
+    file -> s"/opt/docker/public/images/${file.getName}"
+  }.toSeq
+}
+
 dockerCommands ++= Seq(
   Cmd("USER", "root"),
   Cmd("RUN", """java -cp "/opt/docker/lib/*" com.microsoft.playwright.CLI install-deps chromium"""),

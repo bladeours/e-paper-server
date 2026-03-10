@@ -1,4 +1,4 @@
-@(lat: String, long: String, events: String)
+@(lat: String, long: String, events: String, counterStart: String, counterEnd: String)
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
             <div id="calendar-bottom-wrapper">
                 <div id="calendar-bottom"></div>
                 <div id="counter"></div>
-                @* <div id="weather"></div>*@
+                <div id="weather" style="display: none;"></div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@@6.1.15/locales-all.global.min.js"></script>
@@ -37,11 +37,24 @@
         </script>
         <script
         src='@routes.Assets.versioned("javascripts/counter.js")'
-        data-start="2026-01-05"
-        data-target="2026-01-26"
+        data-start="@counterStart"
+        data-target="@counterEnd"
         >
         </script>
         <script src='@routes.Assets.versioned("javascripts/calendar.js")'
         data-events='@events'></script>
+
+        <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const script = document.querySelector('script[data-target]');
+                    const targetDate = new Date(script.getAttribute('data-target'));
+                    const today = new Date();
+
+                    if (targetDate < today) {
+                        document.getElementById('weather').style.display = 'block';
+                        document.getElementById('counter').style.display = 'none';
+                    }
+                });
+        </script>
     </body>
 </html>

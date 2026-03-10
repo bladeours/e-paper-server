@@ -36,6 +36,8 @@ class CalendarController @Inject()(val controllerComponents: ControllerComponent
   def calendarPage: Action[AnyContent] = Action { implicit request =>
     val long = config.get[String]("long")
     val lat = config.get[String]("lat")
-    Ok(views.html.calendarWeek(lat, long, iCalService.fetchEvents()))
+    val counterStart = config.getOptional[String]("counterStart").getOrElse("1990-01-01")
+    val counterEnd = config.getOptional[String]("counterEnd").getOrElse("1990-01-01")
+    Ok(views.html.calendarWeek(lat, long, iCalService.fetchEvents(), counterStart, counterEnd))
   }
 }
